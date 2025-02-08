@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const {login,signup} = require('../controllers/authController');
+const {login,signup, getAllData} = require('../controllers/authController');
 
 const {auth, isStudent, isAdmin} = require('../middlewares/auth')
 
@@ -30,5 +30,7 @@ router.get('/admin', auth, isAdmin, (req,res)=>{
         message: "welcome protected route for admin"
     })
 })
+
+router.get('/getAllData', auth, getAllData);
 
 module.exports = router;

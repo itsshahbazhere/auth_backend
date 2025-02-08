@@ -61,12 +61,19 @@ exports.login = async(req,res)=>{
             expires : new Date( Date.now() + 3*24*60*60*1000) //consider in ms ie 3 days
         }
 
-        res.cookie("shahbaz", jwtToken, options).status(200).json({
+        res.cookie("token", jwtToken, options).status(200).json({
             sucess:true,
             message: "logged in successfully",
             jwtToken,
             user
         });
+
+        // res.status(200).json({
+        //     sucess:true,
+        //     message: "logged in successfully",
+        //     jwtToken,
+        //     user
+        // });
         
     } catch(err){
         return res.status(500).json({
@@ -77,9 +84,6 @@ exports.login = async(req,res)=>{
     }
     
 }
-
-
-
 
 
 
@@ -123,6 +127,28 @@ exports.signup = async(req,res)=>{
             message:"failed to signup",
             error:err.message
 
+        })
+    }
+}
+
+
+//get all data of a user using payload id
+
+exports.getAllData = async(req,res) =>{
+    try{
+        const id = req.user.id;
+        const user =await User.findById(id);
+        res.status(200).json({
+            sucess:true,
+            message:"fetch data using payload passing in token successfully",
+            user,
+        })
+
+    } catch(err){
+        return res.status(500).json({
+            success:false,
+            message:"failed to get data",
+            error:err.message
         })
     }
 }
