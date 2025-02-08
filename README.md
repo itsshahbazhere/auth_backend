@@ -111,6 +111,3 @@ npm run dev
 **Shahbaz**  
 [GitHub Profile](https://github.com/itsshahbazhere)
 
-## License
-This project is open-source and available under the [MIT License](LICENSE).
-
